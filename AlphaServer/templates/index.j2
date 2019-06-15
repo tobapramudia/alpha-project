@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}{{data.title}}{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="col-md-12">
+	 	<h5>Metrics for ssh log-in attempts</h5>
+	 	<ul>
+	 		{% for ssh in data.ssh_fails %}
+	 		<li>{{ssh.row.hostname}} had {{ssh.row.count_log}} attempt </li>
+	 		{% endfor %}
+	 	</ul>
+	 	<a href="{{url_for('r_report')}}">View all data</a>
+	</div>
+</div>
+ 
+{% endblock %}

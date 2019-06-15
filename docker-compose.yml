@@ -1,0 +1,26 @@
+version: '3.5'
+
+services:
+  alpha_server:
+    image: tobapramudia/alpha_server
+    networks:
+      - alpha_net
+    build:
+      context: ./AlphaServer
+    ports:
+      - "5000:5000"
+  alpha_client:
+    image: tobapramudia/alpha_client
+    environment:
+      - server=http://alpha_server:5000
+    ports:
+      - "514:514/udp"
+    networks:
+      - alpha_net
+    build:
+      context: ./AlphaClient
+
+networks:
+  alpha_net:
+    name: alpha_net
+    driver: bridge

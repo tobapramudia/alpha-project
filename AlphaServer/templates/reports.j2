@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}{{data.title}}{% endblock %}
+{% block content %}
+<div class="row">
+	<div class="col-md-12">
+		<div id="reports"></div>
+	</div>
+</div>
+ 
+{% endblock %}
+{% block footer %}
+	<script type="text/javascript">
+
+		$(document).ready(function() {
+
+			$('#reports').FancyGrid({
+				renderTo: 'reports',
+		    height: 900,
+		    data: {
+		    	proxy: {
+		    		type: 'rest',
+		    		url: '{{url_for('r_report_ajax')}}'
+		    	}
+		    },
+		    trackOver: true,
+		    columnLines: false,
+		    defaults: {
+		      type: 'number',
+		      width: 75,
+		      resizable: true
+		    },
+		    paging: {
+		      pageSize: 50,
+		      pageSizeData: [50, 100, 150, 200]
+		    },
+		    columns: [{
+		      index: 'id',
+		      locked: true,
+		      title: 'id',
+		      render: function(o){
+			      o.value = o.data.id;
+			      return o;
+			    },
+		      type: 'number',
+		      width: 60,
+		      editable: false,
+		      resizable: false
+		    },{
+		      index: 'service',
+		      title: 'Service Name',
+		      type: 'string',
+		      width: 100
+		    },{
+		      index: 'hostname',
+		      title: 'Hostname',
+		      type: 'string',
+		      width: 100
+		    },{
+		      index: 'ip_addr',
+		      title: 'IP Address',
+		      type: 'string',
+		      width: 100
+		    },{
+		      index: 'raw_log',
+		      title: 'log',
+		      type: 'string',
+		      width: 900
+		    }]
+		  });
+
+		});
+	</script>
+{% endblock %}
