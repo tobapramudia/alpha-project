@@ -16,10 +16,10 @@ on:
 jobs:
   build:
 
-    runs-on: aida-web
+    runs-on: [aida-web, self-hosted]
     strategy:
       matrix:
-        python-version: [3.5, 3.6, 3.7, 3.8]
+        python-version: [3.6]
 
     steps:
     - uses: actions/checkout@v2
